@@ -1,4 +1,5 @@
 <template>
+  <NuxtLink :to="`/${details?.id}`" class="card-link">
   <div class="card">
     <img 
       v-if="details?.sprites?.front_default" 
@@ -7,6 +8,7 @@
     />
     <h3>{{ name }}</h3>
   </div>
+  </NuxtLink>
 </template>
 
 
@@ -35,5 +37,15 @@ img {
 }
 h3 {
   text-transform: capitalize;
+}
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s;
+}
+
+.card-link:hover {
+  transform: scale(1.05);
 }
 </style>
