@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/${details?.id}`" class="card-link">
+  <NuxtLink :to="`/${details?.name}`" class="card-link">
   <div class="card">
     <img 
       v-if="details?.sprites?.front_default" 

@@ -1,6 +1,7 @@
 <template>
   <main>
-    <h1>Pokédex do Ash</h1>
+    <h1 class="title">Pokédex do Ash</h1>
+    <SearchBar @search="irParaPokemon" class="search-bar"/>
 
     <div v-if="status === 'pending'">A carregar a lista...</div>
     <div v-else-if="error">Ocorreu um erro.</div>
@@ -25,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+
 // Interfaces para os dados
 interface PokemonListItem {
   name: string;
@@ -57,6 +59,12 @@ const prevPage = () => {
     offset.value -= limit.value;
   }
 };
+
+const router = useRouter();
+
+const irParaPokemon = (nome: string) => {
+  router.push(`/${nome}`);
+};
 </script>
 
 
@@ -64,6 +72,9 @@ const prevPage = () => {
 
 
 <style scoped>
+.title {
+  margin-left: 20px;
+}
 .pokemon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -92,5 +103,11 @@ button {
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: left;
+  margin-left: 20px;
 }
 </style>
