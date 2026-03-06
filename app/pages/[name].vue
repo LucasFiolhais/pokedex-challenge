@@ -7,6 +7,11 @@
     </nav>
 
     <div v-if="pending" class="loader">A carregar o perfil do Ash...</div>
+
+    <div v-else-if="error" class="error-box">
+      <h2>Pokémon não encontrado!</h2>
+      <p>Não Conseguimos Encontrar <span class="erroTexto">"{{ route.params.name }}"</span>. </p>
+    </div>
     
     <div v-else-if="pokemon" class="pokemon-card">
       <header class="card-header">
@@ -46,22 +51,15 @@
   </div>
 </template>
 
-
-
 <script setup lang="ts">
 // 1. Acedemos aos parâmetros da rota para saber qual é o ID
 const route = useRoute();
-const pokemonId = route.params.id;
+const pokemonName = route.params.name;
 
 // pedido à api para um especifico
-const { data: pokemon, pending, error } = await useFetch<any>(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+const { data: pokemon, pending, error } = await useFetch<any>(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+
 </script>
-
-
-
-
-
-
 
 <style scoped>
 .profile-container {
@@ -183,4 +181,21 @@ const { data: pokemon, pending, error } = await useFetch<any>(`https://pokeapi.c
 .electric { background: #F8D030; color: #333; }
 
 
+.error-box {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 30px;
+  font-size: large;
+}
+.error-box h2{
+  font-weight: bold;
+  font-size:xx-large;
+}
+.erroTexto {
+  color: red;
+  font-weight: bold;
+  font-size: large;
+}
 </style>
