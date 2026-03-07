@@ -47,6 +47,16 @@
           <span class="value">{{ pokemon.height / 10 }} m</span>
         </div>
       </div>
+
+      <h2>Stats</h2>
+      <StatsBar
+      v-for="s in pokemon.stats" 
+      :key="s.stat.name"
+      :label="s.stat.name" 
+      :value="s.base_stat"
+      class="stat-bar"
+      />
+
     </div>
   </div>
 </template>
@@ -153,6 +163,7 @@ const { data: pokemon, pending, error } = await useFetch<any>(`https://pokeapi.c
   justify-content: space-around;
   border-top: 1px solid #eee;
   padding-top: 20px;
+  margin-bottom: 20px;
 }
 
 .stat-item {
@@ -198,4 +209,5 @@ const { data: pokemon, pending, error } = await useFetch<any>(`https://pokeapi.c
   font-weight: bold;
   font-size: large;
 }
+
 </style>
