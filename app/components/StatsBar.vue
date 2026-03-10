@@ -7,7 +7,7 @@
       <div 
         class="bar-fill" 
         :style="{ 
-          width: percentagem + '%', 
+          width: percentagem + '%',
           backgroundColor: barColor 
         }"
       ></div>
@@ -21,7 +21,7 @@ const props = defineProps<{
   value: number;
 }>();
 
-// Lógica da tradução e cálculo
+// tradução e cálculo
 const translatedName = computed(() => {
   const names: Record<string, string> = {
     hp: 'HP',
@@ -34,14 +34,14 @@ const translatedName = computed(() => {
   return names[props.label] || props.label;
 });
 
-// para dar resultado em percentagem, para a logica da barra
+// dar resultado em percentagem, para funcionar a logica da barra
 const percentagem = computed(() => ((props.value / 255) * 100));
 
 // Lógica das cores
 const barColor = computed(() => {
-  if (props.value < 50) return '#f34444'; // Vermelho
-  if (props.value < 90) return '#ffdd57'; // Amarelo
-  return '#a0e515'; // Verde
+  if (props.value < 50) return '#f34444'; 
+  if (props.value < 90) return '#ffdd57'; 
+  return '#a0e515'; 
 });
 </script>
 

@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     host: 'pokedex.local', // nome para trocar pelo local host
     port: 3000
   },
-  // Ativa a estrutura do Nuxt 4
+
   future: {
     compatibilityVersion: 4,
   },
