@@ -1,6 +1,5 @@
 <template>
-  <main>
-    <h1 class="title">Pokédex do Ash</h1>
+  <div>
     <SearchBar @search="irParaPokemon" class="search-bar"/>
 
     <div v-if="status === 'pending'">A carregar a lista...</div>
@@ -22,32 +21,19 @@
         <button @click="nextPage" :disabled="!data || offset + limit >= data.count">Próxima</button>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
+interface PokemonListItem { name: string; url: string; }
+interface PokeAPIResponse { results: PokemonListItem[]; count: number; }
 
-// Interfaces para os dados
-interface PokemonListItem {
-  name: string;
-  url: string;
-}
-
-interface PokeAPIResponse {
-  results: PokemonListItem[];
-  count: number; // Para saber o total e bloquear o botão "Próxima"
-}
-
-// Pagination
 const limit = ref(24);
 const offset = ref(0);
 
-// atualiza os dados sozinho quando o offset muda
 const apiUrl = computed(() => `https://pokeapi.co/api/v2/pokemon?limit=${limit.value}&offset=${offset.value}`);
-
 const { data, status, error } = await useFetch<PokeAPIResponse>(apiUrl);
 
-// mudar de página
 const nextPage = () => {
   if (data.value && offset.value + limit.value < data.value.count) {
     offset.value += limit.value;
@@ -63,18 +49,12 @@ const prevPage = () => {
 const router = useRouter();
 
 const irParaPokemon = (nome: string) => {
-  router.push(`/${nome}`);
+  router.push(`/${nome.toLowerCase().trim()}`);
 };
 </script>
 
-
-
-
-
 <style scoped>
-.title {
-  margin-left: 20px;
-}
+
 .pokemon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

@@ -16,9 +16,8 @@ const emit = defineEmits(['search']);
 
 const confirmarPesquisa = () => {
   if (query.value.trim()) {
-    // Enviamos o nome limpo (sem espaços e em minúsculas)
     emit('search', query.value.toLowerCase().trim());
-    query.value = ''; // Limpa o campo após pesquisar
+    query.value = ''; // Limpar depois
   }
 };
 </script>
