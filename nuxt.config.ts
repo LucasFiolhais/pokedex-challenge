@@ -1,4 +1,13 @@
 export default defineNuxtConfig({
+  css: ['./assets/main.css'],
+  
+app: {
+    head: {
+      titleTemplate: 'Pokédex - %s',
+      title: 'Home',
+    }
+  },
+
   devServer: {
     host: 'pokedex.local', // nome para trocar pelo local host
     port: 3000

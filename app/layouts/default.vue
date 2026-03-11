@@ -11,17 +11,7 @@
   </div>
 </template>
 
-<style>
-/* fontes */
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=VT323&family=Poppins:wght@400;700&display=swap');
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif; 
-  background-color: #f5f5f5;
-}
-
+<style scoped>
 .main-header {
   background-color: #ef5350;
   color: white;
@@ -47,7 +37,7 @@ body {
   margin: 0;
   font-family: 'Luckiest Guy', cursive;
   letter-spacing: 3px;
-  -webkit-text-stroke: 1px #3b4cca; /* Contorno azul */
+  -webkit-text-stroke: 1px #3b4cca; /* contorno azul */
   font-size: 30px;
 }
 

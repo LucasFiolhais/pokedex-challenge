@@ -1,25 +1,25 @@
 <template>
   <NuxtLink :to="`/${details?.name}`" class="card-link">
-  <div class="card">
-    <img 
-      v-if="details?.sprites?.front_default" 
-      :src="details.sprites.front_default" 
-      :alt="name" 
-    />
-    <h3>{{ name }}</h3>
-  </div>
+    <div class="card">
+      <img 
+        v-if="details" 
+        :src="getFrontSprite(details)" 
+        :alt="name" 
+      />
+      <h3>{{ name }}</h3>
+    </div>
   </NuxtLink>
 </template>
 
-
 <script setup lang="ts">
-// Receber os dados do index
 const props = defineProps<{
   name: string;
   url: string;
 }>();
 
-// ligar para ter os detalhes
+// Chamamos apenas o que precisamos para o card
+const { getFrontSprite } = usePokemonFormatter();
+
 const { data: details } = await useFetch<any>(props.url);
 </script>
 

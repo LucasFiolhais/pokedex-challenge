@@ -1,14 +1,14 @@
 <template>
   <div class="stat-line">
-    <span class="stat-label">{{ translatedName }}</span>
+    <span class="stat-label">{{ formatStatName(label) }}</span>
     <span class="stat-value">{{ value }}</span>
     
     <div class="bar-container">
       <div 
         class="bar-fill" 
         :style="{ 
-          width: percentagem + '%',
-          backgroundColor: barColor 
+          width: calculatePercentage(value) + '%',
+          backgroundColor: getStatColor(value) 
         }"
       ></div>
     </div>
@@ -21,28 +21,8 @@ const props = defineProps<{
   value: number;
 }>();
 
-// tradução e cálculo
-const translatedName = computed(() => {
-  const names: Record<string, string> = {
-    hp: 'HP',
-    attack: 'Ataque',
-    defense: 'Defesa',
-    'special-attack': 'Sp. Atq',
-    'special-defense': 'Sp. Def',
-    speed: 'Velocidade'
-  };
-  return names[props.label] || props.label;
-});
-
-// dar resultado em percentagem, para funcionar a logica da barra
-const percentagem = computed(() => ((props.value / 255) * 100));
-
-// Lógica das cores
-const barColor = computed(() => {
-  if (props.value < 50) return '#f34444'; 
-  if (props.value < 90) return '#ffdd57'; 
-  return '#a0e515'; 
-});
+// puxar o composable
+const { calculatePercentage, getStatColor, formatStatName } = usePokemonStats();
 </script>
 
 <style scoped>

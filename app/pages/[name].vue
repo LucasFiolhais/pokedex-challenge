@@ -9,36 +9,34 @@
     
     <div v-else-if="pokemon" class="pokemon-card">
       <header class="card-header">
-        <span class="pokemon-id pixel-font">#{{ pokemon.id }}</span>
-        <h1 class="pokemon-name pokemon-font">{{ pokemon.name }}</h1>
+        <span class="pokemon-id pixel-font">{{ formatId(pokemon.id) }}</span>
+        <h1 class="pokemon-name pokemon-font">{{ formatName(pokemon.name) }}</h1>
       </header>
 
       <div class="image-wrapper">
         <img 
-          :src="pokemon.sprites.other['official-artwork'].front_default" 
+          :src="getOfficialArtwork(pokemon)" 
           :alt="pokemon.name"
           class="main-image"
         />
       </div>
 
       <div class="types-container">
-        <span 
+        <TypeBadge 
           v-for="t in pokemon.types" 
           :key="t.type.name" 
-          :class="['type-badge', t.type.name]"
-        >
-          {{ t.type.name }}
-        </span>
+          :type="t.type.name" 
+        />
       </div>
 
       <div class="stats-mini-grid">
         <div class="stat-item">
           <span class="label">Peso: </span>
-          <span class="value pixel-font">{{ pokemon.weight / 10 }} kg</span>
+          <span class="value pixel-font">{{ formatWeight(pokemon.weight) }}</span>
         </div>
         <div class="stat-item">
           <span class="label">Altura: </span>
-          <span class="value pixel-font">{{ pokemon.height / 10 }} m</span>
+          <span class="value pixel-font">{{ formatHeight(pokemon.height) }}</span>
         </div>
       </div>
 
@@ -55,26 +53,32 @@
 </template>
 
 <script setup lang="ts">
-// layout de detalhes
 definePageMeta({
   layout: 'details'
 });
 
 const route = useRoute();
-const pokemonName = route.params.name;
 
-const { data: pokemon, pending, error } = await useFetch<any>(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+// puxar composables
+const { fetchPokemonDetails } = usePokemonApi();
+const { formatName, formatId, getOfficialArtwork } = usePokemonFormatter();
+const { formatWeight, formatHeight } = usePokemonMetrics();
+
+// api
+const { data: pokemon, pending, error } = await fetchPokemonDetails(route.params.name as string);
+
+// para mudar o titulo
+useHead({
+  title: pokemon.value ? formatName(pokemon.value.name) : 'Carregando...'
+});
 </script>
 
 <style scoped>
-
-
 .profile-wrapper {
   max-width: 600px;
   margin: 0 auto;
 }
 
-/* meter as fonts */
 .pokemon-font {
   font-family: 'Luckiest Guy', cursive;
   letter-spacing: 2px;
@@ -112,6 +116,7 @@ const { data: pokemon, pending, error } = await useFetch<any>(`https://pokeapi.c
 
 .main-image {
   width: 90%;
+  transition: transform 0.3s ease;
 }
 
 .main-image:hover {
@@ -124,23 +129,6 @@ const { data: pokemon, pending, error } = await useFetch<any>(`https://pokeapi.c
   gap: 10px;
   margin-bottom: 30px;
 }
-
-.type-badge {
-  padding: 6px 20px;
-  border-radius: 20px;
-  color: white;
-  text-transform: uppercase;
-  font-size: 13px;
-  font-weight: bold;
-}
-
-/* Cores dos Tipos */
-.grass { background: #78C850; }
-.fire { background: #F08030; }
-.water { background: #6890F0; }
-.bug { background: #A8B820; }
-.poison { background: #A040A0; }
-.electric { background: #F8D030; color: #333; }
 
 .stats-mini-grid {
   display: flex;
