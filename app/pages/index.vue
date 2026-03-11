@@ -16,40 +16,42 @@
       </div>
 
       <div class="pagination">
-        <button @click="prevPage" :disabled="offset === 0">Anterior</button>
-        <span>Página {{ (offset / limit) + 1 }}</span>
-        <button @click="nextPage" :disabled="!data || offset + limit >= data.count">Próxima</button>
+        <button 
+          class="pixel-btn" 
+          @click="prevPage" 
+          :disabled="offset === 0"
+        >
+          Anterior
+        </button>
+
+        <span class="page-info">Página {{ currentPage }}</span>
+
+        <button 
+          class="pixel-btn" 
+          @click="nextPage(data?.count || 0)" 
+          :disabled="isLastPage(data?.count || 0)"
+        >
+          Próxima
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-interface PokemonListItem { name: string; url: string; }
-interface PokeAPIResponse { results: PokemonListItem[]; count: number; }
-
-const limit = ref(24);
-const offset = ref(0);
-
-const apiUrl = computed(() => `https://pokeapi.co/api/v2/pokemon?limit=${limit.value}&offset=${offset.value}`);
-const { data, status, error } = await useFetch<PokeAPIResponse>(apiUrl);
-
-const nextPage = () => {
-  if (data.value && offset.value + limit.value < data.value.count) {
-    offset.value += limit.value;
-  }
-};
-
-const prevPage = () => {
-  if (offset.value >= limit.value) {
-    offset.value -= limit.value;
-  }
-};
-
+// puxar os composables
+const { limit, offset, currentPage, nextPage, prevPage, isLastPage } = usePagination(24);
+const { getPokemonList } = usePokemonApi();
 const router = useRouter();
 
+// puxar o composable da api
+const { data, status, error } = await getPokemonList(limit, offset);
+
+//para ir para a pág de perfil
 const irParaPokemon = (nome: string) => {
-  router.push(`/${nome.toLowerCase().trim()}`);
+  if (nome.trim()) {
+    router.push(`/${nome.toLowerCase().trim()}`);
+  }
 };
 </script>
 

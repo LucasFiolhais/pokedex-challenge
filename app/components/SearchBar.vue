@@ -17,7 +17,7 @@ const emit = defineEmits(['search']);
 const confirmarPesquisa = () => {
   if (query.value.trim()) {
     emit('search', query.value.toLowerCase().trim());
-    query.value = ''; // Limpar depois
+    query.value = ''; // limpar depois
   }
 };
 </script>

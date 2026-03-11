@@ -13,10 +13,7 @@
   </div>
 </template>
 
-<style>
-/* Importar as fontes */
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=VT323&display=swap');
-
+<style scoped>
 .details-layout {
   min-height: 100%;
   background-color: #f0f0f0;
