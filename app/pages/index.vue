@@ -61,7 +61,9 @@ const irParaPokemon = (nome: string) => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .pagination {
@@ -70,6 +72,9 @@ const irParaPokemon = (nome: string) => {
   align-items: center;
   gap: 20px;
   margin: 30px 0;
+}
+.page-info{
+  color: white;
 }
 
 button {
@@ -87,9 +92,4 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.search-bar {
-  display: flex;
-  justify-content: left;
-  margin-left: 20px;
-}
 </style>

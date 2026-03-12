@@ -26,7 +26,7 @@
 .pokemon-logo {
   width: 200px;
   height: auto;
-  filter: drop-shadow(3px 3px 0px #3b4cca); /* sombra azul para combinar com o texto */
+  filter: drop-shadow(3px 3px 0px #3b4cca);
 }
 
 .pokemon-logo:hover{
@@ -37,7 +37,7 @@
   margin: 0;
   font-family: 'Luckiest Guy', cursive;
   letter-spacing: 3px;
-  -webkit-text-stroke: 1px #3b4cca; /* contorno azul */
+  -webkit-text-stroke: 1px #3b4cca;
   font-size: 30px;
 }
 

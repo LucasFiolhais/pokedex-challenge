@@ -21,10 +21,21 @@ export const usePokemonFormatter = () => {
            || details?.sprites?.front_default;
   };
 
+  
+    const formatWeight = (weight: number) => {
+    return (weight / 10).toFixed(1) + ' kg';
+  };
+
+  const formatHeight = (height: number) => {
+    return (height / 10).toFixed(1) + ' m';
+  };
+
   return { 
     formatName, 
     formatId,
     getFrontSprite, 
-    getOfficialArtwork 
+    getOfficialArtwork,
+    formatWeight,
+    formatHeight,
   };
 };

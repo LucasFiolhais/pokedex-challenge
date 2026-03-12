@@ -29,34 +29,49 @@ const { calculatePercentage, getStatColor, formatStatName } = usePokemonStats();
 .stat-line {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
-  font-family: sans-serif;
+  margin-bottom: 12px; 
+  font-family: 'VT323', monospace;
 }
 
 .stat-label {
   width: 100px;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 1.1rem;
+  color: #444;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .stat-value {
-  width: 40px;
+  width: 45px;
   font-weight: bold;
   text-align: right;
   margin-right: 15px;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 .bar-container {
-  flex:auto;
-  background-color: #eee;
-  height: 10px;
-  border-radius: 5px;
+  flex: auto;
+  background-color: #222;
+  height: 16px;
+  border: 2px solid #333;
+  border-radius: 4px;
   overflow: hidden;
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,0.5);
+  position: relative;
 }
+
 
 .bar-fill {
   height: 100%;
-  border-radius: 5px;
+  border-radius: 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  border-right: 3px solid rgba(0,0,0,0.3);
 }
+
 </style>

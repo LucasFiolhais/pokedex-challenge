@@ -16,7 +16,6 @@
 <style scoped>
 .details-layout {
   min-height: 100%;
-  background-color: #f0f0f0;
   font-family: 'Poppins', sans-serif;
 }
 
