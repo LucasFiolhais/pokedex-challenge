@@ -1,6 +1,10 @@
 <template>
   <NuxtLink :to="`/${name}`" class="card-link">
     <div class="pokemon-card">
+      <div v-if="details && pokemonStore.isFavorite(details.id)" class="captured-badge">
+        <img src="/pokeball.png" alt="Capturado!" class="pokeball-badge-image" />
+      </div>
+
       <span v-if="details" class="pokemon-id">{{ formatId(details.id) }}</span>
       
       <div class="image-container">
@@ -25,6 +29,9 @@ const props = defineProps<{
   name: string;
   url: string;
 }>();
+
+// importa a store
+const pokemonStore = usePokemonStore();
 
 const { getFrontSprite, formatId } = usePokemonFormatter();
 const { data: details } = await useFetch<any>(props.url);
@@ -100,4 +107,21 @@ const { data: details } = await useFetch<any>(props.url);
   margin: 0 auto;
   border-radius: 2px;
 }
+
+.captured-badge {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 45px;
+  height: 45px;
+  z-index: 10;
+}
+
+.pokeball-badge-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
 </style>

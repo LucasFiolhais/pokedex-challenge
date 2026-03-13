@@ -1,19 +1,26 @@
 export const usePagination = (initialLimit = 24) => {
-  const limit = ref(initialLimit);
-  const offset = ref(0);
+  const pokemonStore = usePokemonStore(); 
 
-  // Calcula a página atual (ex: 0/24 + 1 = Página 1)
+  const limit = ref(initialLimit);
+  
+  
+  const offset = ref(pokemonStore.currentOffset);
+
   const currentPage = computed(() => Math.floor(offset.value / limit.value) + 1);
 
   const nextPage = (totalCount: number) => {
     if (offset.value + limit.value < totalCount) {
       offset.value += limit.value;
+      
+      pokemonStore.updateOffset(offset.value);
     }
   };
 
   const prevPage = () => {
     if (offset.value >= limit.value) {
       offset.value -= limit.value;
+      
+      pokemonStore.updateOffset(offset.value);
     }
   };
 

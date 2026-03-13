@@ -53,6 +53,10 @@ const irParaPokemon = (nome: string) => {
     router.push(`/${nome.toLowerCase().trim()}`);
   }
 };
+
+// Importar a store para os favoritos
+const pokemonStore = usePokemonStore()
+
 </script>
 
 <style scoped>
