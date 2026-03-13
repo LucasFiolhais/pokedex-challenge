@@ -29,12 +29,18 @@ const props = defineProps<{
   name: string;
   url: string;
 }>();
+interface PokemonDetails {
+  id: number;
+  sprites: {
+    front_default: string;
+  };
+}
 
-// importa a store
 const pokemonStore = usePokemonStore();
-
 const { getFrontSprite, formatId } = usePokemonFormatter();
-const { data: details } = await useFetch<any>(props.url);
+
+// Alteramos o Record para a nossa Interface PokemonDetails
+const { data: details } = await useFetch<PokemonDetails>(props.url);
 </script>
 
 <style scoped>

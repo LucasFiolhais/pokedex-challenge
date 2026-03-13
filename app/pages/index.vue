@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchBar @search="irParaPokemon" class="search-bar"/>
+    <SearchBar @search="irParaPokemon"/>
 
     <div v-if="status === 'pending'">A carregar a lista...</div>
     <div v-else-if="error">Ocorreu um erro.</div>
@@ -15,25 +15,14 @@
         />
       </div>
 
-      <div class="pagination">
-        <button 
-          class="pixel-btn" 
-          @click="prevPage" 
-          :disabled="offset === 0"
-        >
-          Anterior
-        </button>
+    <AppPagination 
+    :current-page="currentPage"
+    :offset="offset"
+    :is-last-page="isLastPage(data?.count || 0)"
+    @prev="prevPage"
+    @next="nextPage(data?.count || 0)"
+    />
 
-        <span class="page-info">Página {{ currentPage }}</span>
-
-        <button 
-          class="pixel-btn" 
-          @click="nextPage(data?.count || 0)" 
-          :disabled="isLastPage(data?.count || 0)"
-        >
-          Próxima
-        </button>
-      </div>
     </div>
   </div>
 </template>
@@ -54,8 +43,7 @@ const irParaPokemon = (nome: string) => {
   }
 };
 
-// Importar a store para os favoritos
-const pokemonStore = usePokemonStore()
+
 
 </script>
 
