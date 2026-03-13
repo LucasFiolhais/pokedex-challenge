@@ -1,8 +1,8 @@
 <template>
   <button 
-    @click="pokemonStore.toggleFavorite(pokemonId)"
     class="fav-button"
     :class="{ 'is-active': pokemonStore.isFavorite(pokemonId) }"
+    @click="pokemonStore.toggleFavorite(pokemonId)"
   >
     <div class="icon-container">
       <img 
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   pokemonId: {
     type: [Number, String],
     required: true

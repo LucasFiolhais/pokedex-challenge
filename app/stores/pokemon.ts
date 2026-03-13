@@ -1,7 +1,6 @@
- import { defineStore } from 'pinia'
+import { defineStore } from 'pinia'
 
 export const usePokemonStore = defineStore('pokemon', {
-
   state: () => ({
     favoriteIds: [] as number[],
     currentOffset: 0
@@ -19,13 +18,11 @@ export const usePokemonStore = defineStore('pokemon', {
     updateOffset(newOffset: number) {
       this.currentOffset = newOffset
     }
-
   },
-  
+
   getters: {
     isFavorite: (state) => {
       return (id: number) => state.favoriteIds.includes(id)
-
     }
   }
-}) 
+})

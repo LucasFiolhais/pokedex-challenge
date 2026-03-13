@@ -8,7 +8,7 @@
         class="pixel-font"
         @keyup.enter="confirmarPesquisa"
       />
-      <button @click="confirmarPesquisa" class="search-button pokemon-font">
+      <button class="search-button pokemon-font"  @click="confirmarPesquisa">
         GO!
       </button>
     </div>

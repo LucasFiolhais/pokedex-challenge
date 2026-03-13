@@ -1,27 +1,29 @@
 export default defineNuxtConfig({
   css: ['./assets/main.css'],
-  
-  modules: ['@pinia/nuxt'],
-  
-app: {
+
+  modules: ['@pinia/nuxt', '@nuxt/eslint'],
+
+  eslint: {
+    config: {
+      stylistic: false
+    }
+  },
+
+  app: {
     head: {
       titleTemplate: 'Pokédex - %s',
-      title: 'Home',
+      title: 'Home'
     }
   },
 
   devServer: {
-    host: 'pokedex.local', // nome para trocar pelo local host
+    host: 'pokedex.local',
     port: 3000
   },
 
   future: {
-    compatibilityVersion: 4,
+    compatibilityVersion: 4
   },
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
-
+  devtools: { enabled: true }
 })
-
-
-

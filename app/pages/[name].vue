@@ -5,7 +5,7 @@
     <div v-else-if="error" class="error-box">
       <h2 class="pokemon-font">Pokémon não encontrado!</h2>
       <p>Não Conseguimos Encontrar <span class="erroTexto">"{{ route.params.name }}"</span>.</p>
-      <button @click="$router.back()" class="back-button">VOLTAR À BASE</button>
+      <button @click="$router.back()"></button>
     </div>
     
     <div v-else-if="pokemon" class="pokemon-card">
